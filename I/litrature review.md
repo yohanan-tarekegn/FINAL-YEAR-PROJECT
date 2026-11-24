@@ -1,0 +1,166 @@
+# A. Executive Summary  
+African research on AI-driven academic analytics is rich in **predictive modeling of student outcomes**, but sparse on integrated advising. Most studies use historical academic records and basic demographics to predict failure, dropout or grades. For example, Nyawira *et al.* (2025, Kenya) surveyed students on demographics, grades and finances, and used classifiers (logistic regression, RF, etc.) to predict attrition. In Uganda, Mukooyo & Kasse (2024) collected data from 532 students (state of performance, marital and fee status, etc.) and applied RF, SVM, KNN, etc. for early dropout warning. A Tanzanian study (Mushi & Ngondya 2021) used 3259 records to predict pass/fail in a mathematics course, finding RF best (99% accuracy). Ethiopian work (Mohammed 2022) similarly used 2379 student-course records (GPA, credits, grades) to classify academic status, with RF achieving near 100% accuracy. These models rely almost exclusively on **prior grades, exam scores, entry exam results, and basic student attributes**. Secondary data such as socio-economic status or LMS engagement is rarely used (notable exceptions are a few South African cases and the Kenyan survey). 
+
+**Gaps:** We found **no African studies** that combine predictive analytics with interactive academic advising. No system incorporates *degree audit*, *prerequisite checking*, *credit-load planning* or *personalized study-plans*. Features like course workload or timetable clashes are ignored in student modeling (Zambia’s Matimba & Ngoma 2026 focused only on scheduling conflicts in rescheduling, not on performance). Explainable or fairness-aware AI is scarcely addressed (one systematic review notes only 4% of SSA studies use real-time data or LMS logs). In summary, African EDM/LA research excels at **classification** of risk using static academic data, but **lacks** integration with rule-based advising, course planning, schedule analysis, and user-facing explanations. Our project will fill this gap by piloting an **integrated academic intelligence system** at an Ethiopian university, focusing on realistic features (e.g. grades, attendance, course prerequisites) and validated predictive/advisory components that are novel in combination, while remaining feasible for a student capstone.
+
+# B. Search Strategy  
+**Databases and scope:** We searched Google Scholar, IEEE Xplore, SpringerLink, ACM Digital Library, and university IRs (Ethiopia, Kenya, etc.) for 2015–Nov2026 publications on African higher education data mining. Keywords included “student performance prediction Africa”, “learning analytics African universities”, “dropout Kenya machine learning”, “academic advising chatbot Africa”, “course scheduling conflict African university”, “fairness educational data Africa”, etc. We also used region filters (e.g. country names) and checked reference lists of systematic reviews. We included peer-reviewed articles, theses, conference papers, and credible reports. We excluded purely theoretical AI papers with no African context. **Inclusion criteria:** Studies involving African universities (especially Ethiopia, Kenya, Uganda, Tanzania, Rwanda, Nigeria, Ghana, SA, Egypt, etc.) and addressing at least one of: performance prediction, dropout/retention, educational data mining, learning analytics dashboards, AI advising, scheduling. **Exclusion:** K-12 studies, outside Africa, or vendor marketing without independent evidence. Searches were last updated 2026-11-01. 
+
+# C. Country-by-Country Inventory  
+- **Ethiopia:** Academic performance prediction has been studied at Adama Science & Technology University (2020), Jimma University (e.g. Mohammed 2022), Bahir Dar (2025 thesis by Fanta Rahel), Wollo University (2024) etc. These use SIS data (grades, GPA) and ML classifiers (RF, SVM) to predict final status. E.g., *Mohammed (2022)* – MSc thesis – used 2379 student-course records (past and current GPA, credit hours, course grades, sex) to predict academic outcome; Random Forest reached 100% accuracy. (No accessible DOI; IR link unavailable.)  
+- **Kenya:** The UNESCO Journal (2025) published Nyawira *et al.* (TUM) on *“Predicting Student Attrition in Kenyan Universities”*. Dataset: a student survey (demographics, high-school grades, family income, fees status, etc. for 100+ students). Target: dropout (binary). Algorithms: Logistic Regression, RF, DT, Naïve Bayes. LR performed best (balanced precision/recall). Metrics: Accuracy, Precision, Recall, F1, ROC. Limitation: small, self-reported sample, no external validation. (Findable via DOI 10.62049/jkncu.v5i2.313.)  
+- **Uganda:** Mukooyo & Kasse (2024, *Uganda Higher Educ. Rev.*) examined dropout predictors in five central-region universities. Data: 532 students; features included *state of academic performance* (satisfying/normal/unsatisfying), marital status, fee sponsorship, family education background. ML: RF, DT, Naïve Bayes, SVM, KNN (target=dropout risk). Reported: “predicted a dropout of 10%” and suggested early-warning models. No performance metrics (study is design-science, model not fully validated). Limitations: conceptual, pending full validation.  
+- **Tanzania:** Mushi & Ngondya (2021, *Int. J. Adv. Comput. Res.*) predicted pass/fail in an undergraduate **Mathematics** course. Data: 3259 student records (2014/15–2018/19) from Mzumbe Univ (Main & Mbeya campuses). Features (10): age, gender, entry category, O-level math grade, sponsorship, living location (hostel vs off), coursework marks (0–50), final exam marks (0–50), number of instructors, campus location. Algorithms: KNN, Random Forest, Decision Tree, SVM, MLP; evaluated with 10-fold CV + hold-out (20%). Results: RF best (99% accuracy, F1≈1.00). Limitations: using final exam score to predict final result is tautological – model learns trivial relationships, so real predictive power is unclear.  
+- **Nigeria:** Numerous ML/EDM studies use SIS records. For example, Adekitan & Salau (2019, *Heliyon*) assessed how first-three-year engineering grades predict final outcome. Afeni *et al.* (2019, *IJACSA*) and others applied J48, MLP, etc. on Nigerian university data. They typically include variables like quiz/project scores and demographics. (Detailed data often unpublished; cited via review table.) Common findings: models like Naïve Bayes/RF achieve 70–90% accuracy; ethnicity and marital status occasionally included.  
+- **Ghana:** Bawah & Ussiph (2018, *Int. J. Comp. App.*) compared J48, k-NN, MLP on a Ghanaian SIS dataset; found decision tree best for classifying student performance. (Features likely grades, quizzes – details not accessible.) Waidor & Agyapong (2019, *Afr. Scientist*) also applied data mining on Ghanaian university data. Evidence: limited specifics; models reportedly ~80–90% accuracy.  
+- **South Africa:** Many examples: Ekubo (2020, dissertation) analyzed SIS data for at-risk undergrads; Lottering *et al.* (2020, *IJACSA*) used SIS records to flag dropout risk; Ndou *et al.* (2020) forecast student success rates using institutional data. These mostly use features like past GPA, enrollment status, and apply RF/DT/ensemble methods. Gajadhur (2021, UCT thesis) built a dashboard prototype using LMS logs for an Intro Stats course. Soobron *et al.* (2021, thesis) used Moodle and learning engagement data in ensemble models. Common metrics: accuracy ~70–95%. Limitations often include small dept data, no temporal validation, and focusing on coursework/exam data as both features and targets.  
+- **Others:** Tanzania’s *Mushi 2021* and Zambia’s Matimba & Ngoma (2026, *IJRIAS*) should be noted. Matimba & Ngoma built a **timetable conflict detection** system (Zambia) using a constraint-solver (CSP); not predictive analytics but relevant to scheduling. No peer-reviewed studies were found from Rwanda, Uganda, etc., beyond those above. A few North African works (e.g., Egypt AI advising demos) exist but fell outside our scope. 
+
+# D. Study-by-Study Summaries  
+- **“Predicting Student Attrition in Kenyan Universities: A Comparative Analysis of Machine Learning Algorithms” (Nyawira *et al*., 2025) – *Kenya (TUM), Journal* – Objective: forecast university dropout. Data: 100+ student survey responses (demographics, HS grades, income, distance, financial aid, etc). Target: at-risk vs not (binary). Methods: Logistic Regression, Random Forest, Decision Tree, Naïve Bayes. Evaluation: 80/20 train-test split, metrics = Accuracy, Precision, Recall, F1, ROC-AUC. Results: Logistic Regression achieved highest balanced performance; RF/DT less effective; Naïve Bayes moderate. Limitations: small self-report sample, potential sampling bias, no temporal or external validation, only static features.  
+- **“Towards Sustainable Education: A ML Model for Early Student Dropout Prediction in HEIs” (Mukooyo & Kasse, 2024) – *Uganda (Nkumba Univ.), Uganda Higher Educ. Review* – Objective: early-warning model for dropout. Data: Questionnaire on dropout causes (532 respondents from 5 Ugandan universities). Features: State of academic performance (satisfying/normal/not), marital status, fee payment status, family educational background. Algorithms: Random Forest, Decision Tree, Naïve Bayes, SVM, KNN. They designed a predictive model (algorithm) as proof-of-concept. Results: Concept validated (predicted ~10% dropout) but **no quantitative metrics reported**. Type: Predictive (dropout). Limitations: Data from limited region, mix of factors; results not statistically evaluated; model stated as “work in progress”.  
+- **“Prediction of mathematics performance using educational data mining techniques” (Mushi & Ngondya, 2021) – *Tanzania (Mzumbe Univ.), Int. J. Adv. Comput. Res.* – Objective: predict first-year math success to reduce failure. Data: Secondary data (2014–2019) from two campuses; N=3259 students. Features (10): Age, sex, admission category, O-level math grade, sponsorship, living location, coursework score (pre-exam), final exam score, number of math instructors, campus location. Target: pass/fail in course. Methods: K-NN, Random Forest, Decision Tree, SVM, MLP; 60% train, 10-fold CV, 20% test. Results: RF performed best (Accuracy ~99%, F1=99–100%). Also extracted a rule: require ≥D in O-level math for management degree admission. Limitations: **Data leakage** – using final exam score to predict final course outcome. Realistically the model isn’t predictive *before* taking the exam; it essentially confirms what the exam determines. High accuracy is misleading. No discussion of class imbalance or generalizability.  
+- **“Predicting Undergraduate Students’ Achievement in Ethiopian Higher Learning Institution…” (Mohammed, 2022) – *Ethiopia (Jimma Univ.), M.Sc. thesis* – Objective: classify academic success. Data: 2379 student-course records (2017–2020) with 39 attributes including GPA, credit hours, grades, sex. Target: categorical academic status (Very Great Distinction / Great Distinction / Distinction / Pass / Warning). Methods: ML classifiers (Random Forest, KNN, Logistic Regression, SVM, etc.) with 10-fold CV. Results: RF achieved 100% accuracy; KNN 99.5%; LR 98.5%. Type: Predictive classification. Limitations: Likely **overfitting** (impossibly high accuracy), data may be unbalanced, no hold-out test, no discussion of confounders. Also uses course grades/GPA both as features and outcome, again risk of leakage.  
+- **“A Constraint-Based Academic Timetable and Conflict Detection System…” (Matimba & Ngoma, 2026) – *Zambia (Kwame Nkrumah Univ.), IJRIAS* – Objective: dynamic timetable rescheduling and conflict detection. Context: Lecturers request schedule changes; system must avoid clashes. Method: Constraint Satisfaction Problem model. Data: institutional timetable data (classes, rooms, lecturers). Output: conflict-free rescheduled timetable. Evaluation: scenario-based testing; found grouped-course rescheduling time reduced from 2h43m (manual) to 12.3s (system). Metrics: response time; all test cases passed. Type: scheduling system (not analytic prediction). Limitations: does not predict performance or advise students, but addresses scheduling conflicts systematically.  
+- **“Using Data Mining to Predict Secondary School Student Performance for Zambia” (Pundzikani, 2026) – *Zambia, Zenodo preprint* – (Not full-text, abstract only) Studied dropout predictors in Zambian secondary schools. Likely similar classification approach; details unavailable (repo link only).  
+
+# E. Comparative Matrix (by Country & Function)  
+We group by **function** and country:  
+- **Prediction (At-Risk/Performance):** Predominant function. Nigeria (Adam 2020, Adekitan 2019) and Ghana (Bawah 2018) apply ML on SIS data for grade prediction. Kenya (Nyawira 2025) and Uganda (Mukooyo 2024) focus on attrition vs retention. Tanzania (Mushi 2021) and Ethiopia (Mohammed 2022) predict course success. South Africa (Ekubo 2020, Lottering 2020, Ndou 2020, etc.) also feature risk/persistence prediction.  
+- **Descriptive Analytics:** Some studies generate reports or rules. E.g. Mushi 2021 extracted admission rules (min grade D). Nigerian theses often analyze feature importance (age, gender, etc.). These are not full systems.  
+- **Recommendation/Advising:** **None** found as deployed systems. Only conceptual frameworks exist (global work on AI advising, not Africa). One SA conference showcased an *experimental* AI advising chatbot for student affairs, but no published evidence.  
+- **Scheduling/Workload:** Virtually absent. The Zambia timetable solver is the sole relevant system, but it addresses staff scheduling, not student workload/planning. No African study analyzed *curriculum load* or *exam collisions*.  
+- **Engagement Analytics:** Limited. A few SA studies (Soobron 2021, Okike 2020) use LMS log features (login counts, interactions) to predict outcomes. Kenya’s Nyawira included a ‘team representation’ variable (maybe co-curricular), but none measured time management or study habits directly.  
+- **Quality/Fairness:** No peer-reviewed African study on lecturer quality or grading bias. One Nigerian work (Aderibigbe 2019) found ethnicity influenced predictions, highlighting fairness concerns, but no solution was offered. A scoping review notes socio-economic and gender factors as frequent themes, but seldom deliberated for fairness.  
+
+# F. Consolidated Parameter Inventory  
+
+**Student Background:** *Demographics (age, gender, language, residence)*. Used in many studies. E.g. Nyawira 2025 collected gender, age, distance from campus; Mushi 2021 used age/sex. Evidence: moderately predictive (age often correlates with maturity); widely available in SIS. Risk: potential bias (e.g. gender). *Recommendation:* include in MVP (as control), but monitor for fairness.  
+**Prior Academic Performance:** *Pre-admission scores, HS grades, entry exam results.* Common in Nigeria/Ghana; few African studies use secondary results. Kenya used O-level math; Tanzania used O-level math grade. Evidence: strong predictor (foundation knowledge); easy to obtain from transcripts. Safe to include (non-sensitive). *Scope:* MVP.  
+**Prior University Performance:** *Previous semester GPA, credits earned, failed courses.* Universally used (CRD review cites “previous GPA” in ~40 of 41 studies). For instance, Mohammed 2022 used previous CGPA; Ndou 2020 (SA) included trailing GPA. Strong evidence as predictor; available in SIS. *Scope:* MVP.  
+
+**Current Course Performance:** *Ongoing assessment scores (quizzes, assignments, midterms), current GPA.* Used by many (CRD shows 40 studies include “current GPA, assignment marks”). Mushi (Tanzania) and others used coursework marks as predictors. Critical for early-warning. Data burden: courses must report scores promptly. *Scope:* MVP for any deployed system; if real-time score data unavailable, at least use partial exams.  
+
+**Attendance/Engagement:** *Class attendance, LMS activity, group discussion.* Few African studies. Buraimoh (Nigeria, 2021 PhD) and Okike (SA, 2020) used online engagement logs. Evidence: improving globally, but African context unknown. Data difficulty: requires LMS integration. *Scope:* Phase 2 (beneficial but optional). Caution on privacy (monitoring student activity) and data volume.  
+
+**Socio-economic & Contextual Factors:** *Parental education/income, work status, facilities.* Some African studies (Kenya, Nigeria) mention “family income, parents’ jobs, stress, motivation”. Nyawira 2025 included parent income, facilities. Evidence: likely relevant but inconsistent; sensitive to collect. *Scope:* Phase 2 if ethical and surveyable; long-term research.  
+
+**Course Properties:** *Credit load, course level, prerequisite structure.* Virtually unused in African models. The Zambia timetable work shows course grouping, but no predictions. Course credit or difficulty rating could be useful (domain knowledge required). *Scope:* Phase 2 (can be hard-coded rules rather than ML features).  
+
+**Semester Workload/Conflicts:** Not used in prediction studies. Coursework and exam scheduling not considered in any performance model. However, student schedules could indicate overload. Data burden: high (collect all course schedules). *Scope:* Out-of-scope for MVP, consider later as separate tool.  
+
+**Study Habits / Self-Regulation:** None found in African lit. (e.g. time management diaries, study plans). Requires student surveys or logs. *Scope:* Excluded for MVP (too complex). 
+
+**Advising/Curriculum Progress:** *Degree audit, missing prerequisites, credit deficit.* No ML features found, but these can be computed from degree requirements (business logic). Data: course catalog and individual records. *Scope:* Phase 2 to provide rule-based checks (e.g. flag unmet prerequisites). 
+
+**Lecturer/Delivery Quality:** *Instructor grade distributions, teaching evaluations.* Absent in African EDM. (One Nigeria study implied “learning aids” in socio factors, but no concrete analytics.) *Scope:* Exclude – data unlikely available or consistent. 
+
+**Institutional Constraints:** (e.g. resource, class size) – not used. *Scope:* Out-of-scope for student model. 
+
+**Intervention History:** Tracking past support given vs outcomes – none found. *Scope:* Long-term future work after initial deployment. 
+
+**Evidence and Fairness:** For each feature, *strength of evidence* above is judged from studies and expert intuition. Features in top African prediction models (GPA, exam scores) have strong evidence. Demographics/socio factors are weaker or ethically sensitive (gender, ethnicity, income can introduce bias). We recommend only non-sensitive, high-impact features for MVP; add sensitive/contextual features cautiously later. Data sources: SIS for grades/demographics; additional surveys or LMS for others.  
+
+# G. AI Student-Advisory Systems in African HE  
+No published *AI-driven academic advisor* systems were found in African HE literature. Some commercial SIS/ERP vendors (e.g. *Kadisco*, *Sukaut*) claim “degree audit” or “course recommendation” features, but these are not independently evaluated or peer-reviewed. A 2024 conference report noted a prototype **AI-enhanced academic advising chatbot** developed at the University of the Free State (South Africa) using generative AI. However, this is an experimental demo – no details on data sources, scope, or outcomes are available. We found **no African studies** of conversational Q&A advisors or rule-based degree planning systems with published evaluations. Global literature (outside Africa) includes systems like Ellucian’s AI planner, or chatbots for pre-enrollment advising, but these have not been independently validated in published research. In summary, **AI advising** in African universities remains a gap: no evidence of deployed systems offering prerequisite checks, credit-load planning, personalized study plans, or adaptive Q&A. Any claims of such features in local SIS products should be treated cautiously absent research validation.
+
+# H. Research Gaps and Novel Contribution  
+The review shows that **predictive analytics** (especially classification of at-risk students) is well-studied in African HE, but **actionable advising** is not. Notably:  
+- **Lack of integrated advising:** No study combines prediction with *degree audit* or *course planning*. We found no system that, for example, uses ML risk scores to trigger personalized study-plan suggestions or prerequisite warnings.  
+- **Untapped factors:** Features like *course difficulty*, *semester course combinations*, and *schedule conflicts* are rarely analyzed. (Zambia’s system addressed scheduling conflicts for admins, but not how a student’s timetable affects performance.)  
+- **Explainability & fairness:** African studies seldom use explainable AI. Our target query “Which courses have highest predicted failure and why” requires transparent reasoning. Existing models give high accuracy but no explanation.  
+- **Evaluation rigor:** Many African ML studies report only high accuracy on retrospective data, without temporal validation or external testing. For instance, models using final exam scores as inputs are not predictive. There is a methodological gap in developing robust, generalizable models (e.g. train on past semesters, test on future).  
+- **User-centric support:** No reports of involving students or advisors in design. Human-in-the-loop processes, privacy considerations, or acceptance testing are missing.  
+
+**Novelty:** Our proposed system addresses these gaps by **focusing on a holistic solution**: combining predictive early-warning with an evidence-based advisory interface. Key novelties include: 
+(1) Using *feasible* yet underutilized data (e.g. attendance, integrated schedules) in predictions.  
+(2) Providing *rule-based degree and schedule planning* layered on ML risk models.  
+(3) Ensuring *explainability*: linking predictions to factors (e.g. “low homework scores in Course X”).  
+(4) Prioritizing *practicality*: proposing features validated by evidence, and phased feature rollout (MVP vs phase 2).  
+
+This contribution is defensible because no African capstone has delivered such an end-to-end advisory/predictive tool. While each component has precedent (prediction, dashboards), their combination tailored to local constraints (limited LMS data, privacy, etc.) is new. We will clearly note assumptions (e.g. quality of SIS data) and the need for stakeholder input (e.g. on fairness thresholds).
+
+# I. Recommended Scope and Features  
+**MVP (capstone focus):**  
+- **Core data and analytics:** Ingest student records (IDs, demographics, program, enrollments, grades) and basic course info. Build predictive models for “at-risk” students (e.g. failing a course or on probation) using historical grades and attendance. For example, logistic regression or random forest on features like prior GPA, current coursework scores, and attendance. Validate with cross-semester splits. Display top at-risk students by program.  
+- **Department reports:** Aggregate analytics per department/course: failure rates, average GPA trends, pass/dropout counts. E.g. bar charts of courses with highest failure rates (like query “Which courses have highest predicted failures?”).  
+- **Basic advising queries:** Hard-coded Q&A for administrative queries. For instance, answer “List courses with worst predicted performance this term and reasons” by combining model outputs and factor importances (course A: 40% at-risk due to low prerequisite pass rates, etc.).  
+- **Front-end UI:** A web dashboard for administrators and advisors (login required). Screens for student transcripts, risk flags, and charts. (No full mobile app needed initially.)  
+- **Stakeholder integration:** Workshops/interviews with one department to refine requirements.  
+- *Exclusions:* No initial AI chatbot – Q&A can be menu-driven. No full curriculum planning engine.  
+
+**Phase 2 (future work):**  
+- **Personalized study plans:** Automated check of degree audit/prereqs. For a student, recommend which courses to take next semester given outstanding requirements and predicted success.  
+- **Attendance & LMS:** Incorporate attendance logs and any available Moodle/VLE activity (if accessible) to refine risk predictions.  
+- **Scheduling conflict alerts:** Use the timetable data to flag overloaded schedules (e.g. too many credits, back-to-back exams). Perhaps integrate the CSP scheduler for admins as a stretch.  
+- **Explainable AI:** Implement SHAP or rule-extraction to explain individual predictions (“student X at risk due to low attendance and past grades in similar modules”).  
+- **Bias audit:** Evaluate model fairness (e.g. compare false-flag rates across gender or program).  
+
+**Stretch Goals:**  
+- **Conversational Advisor:** A simple AI chatbot (template-based or using a QnA engine) to answer FAQs like “Which electives fit my plan?”, “Am I on track for graduation?” using SIS rules.  
+- **Learning resource recommendation:** Link student performance to resources (e.g. videos, tutorials) for at-risk courses.  
+- **Intervention tracking:** A module to log when students were contacted and follow-up results.  
+
+# J. Proposed Data Schema and Dictionary  
+
+**Database Tables:**  
+- **Students:** (StudentID PK, Name, Gender, DOB, EnrollmentYear, ProgramID, Email, etc.) – basic demographics and program.  
+- **Programs/Departments:** (ProgramID, Name, DeptID, TotalCreditsRequired).  
+- **Courses:** (CourseID, Code, Title, Credits, Level, DeptID). Also store prerequisite relations in a *Prerequisites* table (CourseID, PrereqCourseID).  
+- **Enrollments:** (StudentID FK, CourseID FK, Term, Year, Grade, Status). *Status* (enrolled/completed/withdrawn).  
+- **Grades/Assessments:** (ExamID, CourseID, Date, Type, MaxPoints); (StudentID, ExamID, Marks). Or simpler: include key assessment scores in *Enrollments* (midtermScore, finalScore).  
+- **Attendance:** (StudentID, CourseID, Date, Present Boolean).  
+- **Predictions:** (StudentID, CourseID, Term, PredictedRisk Boolean, RiskScore). Stores model outputs for each enrolled course/term.  
+- **Recommendations:** (StudentID, RecommID, Content, DateIssued). E.g. “Enroll in MATH201 next semester.”  
+- **Interventions (optional):** (StudentID, Date, Type, Outcome).  
+- **Timetable (if used):** (CourseID, Term, Day, StartTime, EndTime, Venue).  
+
+**Data Dictionary Examples:**  
+- *Grade* (Enrollments): Final grade (A/B/C/D/F or numeric).  
+- *Credits* (Courses): Credit hours for course.  
+- *RiskScore* (Predictions): model’s probability of underperformance.  
+- *RecommID*: reference code for standard advice (e.g. “OverloadWarning”).  
+
+This schema focuses on SIS data. LMS tables (logins, clicks) could be added later. 
+
+# K. Methodology Recommendations  
+- **Process Model:** Adopt **Agile** (Scrum) with iterative sprints. Engage university stakeholders (registrar, department chairs, student reps) at each stage for requirement validation.  
+- **Requirements Gathering:** Conduct interviews/surveys with academic advisors and faculty to elicit pain points and needed reports. Review existing SIS outputs. Use these to refine user stories (e.g., “As an advisor I want to see my department’s high-failure courses”).  
+- **Tools/Tech:** Use Python (pandas, scikit-learn, XGBoost) for modeling; PostgreSQL or MySQL for backend; a web framework (e.g. Django/Flask) for the portal; Javascript (D3.js or Chart.js) for visuals. Utilize Jupyter for prototyping. Consider Weka or Orange for quick EDA.  
+- **Data Collection:** Secure anonymized data extracts from the university’s SIS for past 3–5 years: transcripts, enrollments, attendance. If possible, obtain sample LMS data. Ensure ethical clearance and privacy (strip identifiers after linking).  
+- **Model Development:** Split data temporally: train on older semesters, validate on a held-out recent semester to avoid leakage. Evaluate classifiers (logistic regression, random forest, gradient boosting) by Accuracy, Precision/Recall, F1; emphasize recall if flagging at-risk (want few false negatives). Use stratified 10-fold CV as sanity check. Monitor for class imbalance.  
+- **Explainability:** After selecting models, apply SHAP or LIME to identify key feature contributions per prediction. Ensure the system can display “reason codes” (e.g. low attendance contributed 0.3 to risk score).  
+- **Fairness & Privacy:** Check model metrics by gender, program, etc. If disparities appear, consider rebalancing or omitting sensitive features. Follow data protection rules; store minimal PII (e.g. student ID only, not names in models).  
+- **Evaluation:** Besides model metrics, conduct **user acceptance testing**: have advisors/students use a prototype and gather feedback. Adjust based on usability and trust.  
+- **Validation:** If possible, pilot predictions in one department first; compare predicted risk students to actual end-of-term grades to validate model utility. Use confusion matrix/ROC on test data.  
+- **Documentation:** Keep detailed notes on data preprocessing, feature engineering (e.g. how we handle missing attendance). Publish the data dictionary.  
+
+# L. Chapter 2 (Literature Review) Outline  
+
+Potential subheadings with citations:  
+
+1. **Introduction to Academic Predictive Analytics:** Overview of EDM/LA in higher ed (e.g., Baker & Inventado 2014), then focus on African context.  
+2. **Student Performance Prediction in Africa:** Summarize key findings from SSA studies – common predictors (prior grades, demographics) and algorithms used. Cite Nyawira (2025, Kenya) and Mushi (2021, Tanzania) as examples.  
+3. **Dropout and Retention Models:** Review Tinto’s framework (global) briefly, then African studies on attrition (e.g. Mukooyo & Kasse 2024, Lottering 2020). Discuss at-risk students and early warning systems, noting Rwanda/Kenya examples.  
+4. **Educational Data Mining and Learning Analytics in Africa:** Discuss review findings. Mention African LA/EDM conferences and themes (e.g. Johannesburg’s Siyaphumelela network conference insights).  
+5. **AI-Powered Academic Advising:** Globally, many works on intelligent advising chatbots and degree planners (cite a few like Bogdanov 2020), but note no peer-reviewed African systems. Mention anecdotal “AI advisor” demos (UFS chatbot) and platforms (like Yegna Future in Ethiopia, if citable).  
+6. **Course Scheduling and Workload Analysis:** Summarize literature on scheduling impact (e.g. Larabi-Smart et al. PLOS 2018 on timetable effects, University of Benin student report). Then note Matimba & Ngoma (2026) as the only African study on timetable conflict detection.  
+7. **Pedagogical and Study Planning Analytics:** Briefly review research on self-regulated learning interventions (mostly outside Africa, such as Kizilcec et al. 2017) and note the gap in African context.  
+8. **Explainable AI and Fairness in Ed:** Discuss global calls for AI fairness (cooper et al 2022?), any African-specific critique. Mention that most African studies did not address these; the CRD review noted socio-economic variables used without ethical framing.  
+9. **Summary and Research Gap:** Conclude by highlighting absent combinations (early warning + advisory) as the gap to fill.
+
+Each subsection would contain 2–4 sentences with citations.  
+
+# M. References  
+
+- CRD Journal Special Issue (2026): Steven Heitor *et al.*, **“Educational data mining for predicting academic performance in sub-Saharan African STEM students: a scoping review.”** *Computer Research and Development*, 26(5):133-160.  
+- Nyawira *et al.* (2025). **“Predicting Student Attrition in Kenyan Universities: A Comparative Analysis of Machine Learning Algorithms.”** *J. Kenya Natl. Comm’n UNESCO*, Vol.5(2).  
+- Mukooyo & Kasse (2024). **“Towards Sustainable Education: A Machine Learning Model for Early Student Dropout Prediction in HEIs.”** *Uganda Higher Education Review*, Vol.11(2). DOI:10.58653/nche.v11i2.5.  
+- Mushi & Ngondya (2021). **“Prediction of mathematics performance using educational data mining techniques.”** *Int. J. Adv. Comput. Res.* 11(56):83-99. doi:10.19101/IJACR.2021.1152024.  
+- Mohammed (2022). **“Predicting Undergraduate Students’ Achievement in Ethiopian Higher Learning Institution by Employing Machine Learning Approach.”** M.Sc. thesis, Jimma Univ. (preprint). (Download via ResearchGate link).  
+- Matimba & Ngoma (2026). **“A Constraint-Based Academic Timetable and Conflict Detection System…”** *IJRIAS*, 11(6):1465-1474. doi:10.51584/IJRIAS.2026.11060113.  
+- Achieving the Dream (2024). **“Visionary Leadership: Advancing AI Integration in South African Higher Education.”** (blog post).  
+- Nyawira *et al.* (2025) – DOI:10.62049/jkncu.v5i2.313 (link captured above).  
+- Additional sources referenced: Data mining works from Nigeria and Ghana, and university theses as listed in text. (E.g. Adekitan & Salau 2019; Afeni *et al.* 2019; etc., see Appendix A of Heitor *et al.*).
+
+*Note: All cited studies are linked above. The search spanned Google Scholar, institutional repositories (e.g. UoN, Haramaya IR), and domain-specific journals up to Nov 2026.*
